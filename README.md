@@ -1,28 +1,100 @@
-React + Vite
+# 🚀 To-Do List Avançado (Back-End Completo)
 
-Este modelo fornece uma configuração mínima para fazer o React funcionar no Vite com HMR (Hot Module Replacement) e algumas regras do ESLint.
+## 📌 Visão Geral
+Este repositório contém o **Back-End (API)** de um sistema completo de **Lista de Tarefas (To-Do List)**, desenvolvido com a arquitetura **MERN Stack** (MongoDB, Express, Node.js).  
 
-Atualmente, dois plugins oficiais estão disponíveis:
+✨ **Destaques do projeto**:  
+- Autenticação segura com **JWT**  
+- Cada usuário só manipula suas próprias tarefas  
+- API pronta para consumo pelo Front-End React  
+- Estrutura modular seguindo **MVC**  
 
-@vitejs/plugin-react
- utiliza Babel
- (ou oxc
- quando usado no rolldown-vite
-) para Fast Refresh
+---
 
-@vitejs/plugin-react-swc
- utiliza SWC
- para Fast Refresh
+## 🛠️ Pilha Tecnológica (Tech Stack)
 
-Compilador React
+| Categoria | Tecnologia | Uso Principal |
+|-----------|-----------|---------------|
+| 🌐 Ambiente | Node.js | Motor de execução JavaScript no servidor |
+| ⚡ Framework | Express | Criação das rotas e estrutura da API |
+| 🗄️ Banco de Dados | MongoDB Atlas | Armazenamento NoSQL (Usuários e Tarefas) |
+| 📦 ODM | Mongoose | Modelagem de dados e comunicação com MongoDB |
+| 🔒 Segurança | bcryptjs | Criptografia de senhas |
+| 🔑 Segurança | jsonwebtoken (JWT) | Geração de tokens de autenticação |
+| 🛠️ Utilitários | dotenv, cors | Variáveis de ambiente e permissões CORS |
 
-O Compilador React não está habilitado neste modelo devido ao impacto no desempenho de desenvolvimento e build.
-Para adicioná-lo, veja a documentação aqui
-.
+---
 
-Expandindo a configuração do ESLint
+## 📁 Estrutura de Pastas
 
-Se você estiver desenvolvendo uma aplicação de produção, recomendamos usar TypeScript com regras de lint conscientes de tipos habilitadas.
-Confira o modelo TS
- para informações sobre como integrar TypeScript e typescript-eslint
- no seu projeto.
+PROJETO-TO-DO-LIST/
+├── backend/
+│ ├── controllers/ # Lógica das rotas (Registro, Login, CRUD)
+│ │ ├── authController.js
+│ │ └── taskController.js
+│ ├── models/ # Estrutura dos dados (Schemas)
+│ │ ├── User.js
+│ │ └── Task.js
+│ ├── routes/ # Endpoints e aplicação da segurança
+│ │ ├── authRoutes.js
+│ │ └── taskRoutes.js
+│ ├── middleware/ # Funções de proteção (JWT)
+│ │ └── authMiddleware.js
+│ ├── .env # Variáveis secretas
+│ └── server.js # Arquivo principal (rotas, DB, middlewares)
+└── frontend/ # Área para Front-End React
+
+yaml
+Copiar código
+
+---
+
+## ⚙️ Instalação e Configuração (Back-End)
+
+### Pré-requisitos
+- Node.js e npm instalados  
+- Conta no MongoDB Atlas com cluster configurado  
+
+### Instalação
+```bash
+cd backend
+npm install
+Configuração do .env
+env
+Copiar código
+MONGO_URI="mongodb+srv://<USUARIO>:<SENHA>@cluster0.xxx.mongodb.net/todo-db?retryWrites=true&w=majority"
+PORT=5000
+JWT_SECRET="sua_chave_secreta_aleatoria_e_forte_aqui"
+Iniciar o Servidor
+bash
+Copiar código
+npm run dev
+🌐 O servidor estará rodando em: http://localhost:5000
+
+🔑 API Endpoints
+1️⃣ Rotas de Autenticação (/api/auth)
+Método	Endpoint	Descrição	Status
+POST	/api/auth/register	Cria novo usuário	Pública
+POST	/api/auth/login	Realiza login e retorna Token JWT	Pública
+
+2️⃣ Rotas de Tarefas (/api/tasks)
+⚠️ Todas as rotas requerem o Token JWT no header:
+Authorization: Bearer <TOKEN>
+
+Método	Endpoint	Descrição	Segurança
+GET	/api/tasks	Lista tarefas do usuário logado	Privada
+POST	/api/tasks	Cria nova tarefa associada ao usuário logado	Privada
+PUT	/api/tasks/:id	Atualiza tarefa específica (verifica dono)	Privada
+DELETE	/api/tasks/:id	Deleta tarefa específica (verifica dono)	Privada
+
+✅ Funcionalidades
+📝 Criar, editar e deletar tarefas
+
+✔️ Marcar tarefas como concluídas
+
+🔒 Login e registro de usuários
+
+🛡️ Autenticação e controle de acesso via JWT
+
+🎯 Conclusão
+Esta API fornece todas as funcionalidades de um To-Do List completo, pronta para integração com Front-End em React ou qualquer cliente RESTful.

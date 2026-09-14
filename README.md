@@ -27,48 +27,50 @@ Este repositório contém o **Back-End (API)** de um sistema completo de **Lista
 
 ## 📁 Estrutura de Pastas
 
+```
 PROJETO-TO-DO-LIST/
-├── backend/
-│ ├── controllers/ # Lógica das rotas (Registro, Login, CRUD)
-│ │ ├── authController.js
-│ │ └── taskController.js
-│ ├── models/ # Estrutura dos dados (Schemas)
-│ │ ├── User.js
-│ │ └── Task.js
-│ ├── routes/ # Endpoints e aplicação da segurança
-│ │ ├── authRoutes.js
-│ │ └── taskRoutes.js
-│ ├── middleware/ # Funções de proteção (JWT)
-│ │ └── authMiddleware.js
-│ ├── .env # Variáveis secretas
-│ └── server.js # Arquivo principal (rotas, DB, middlewares)
-└── frontend/ # Área para Front-End React
+├── controllers/        # Lógica das rotas (Registro, Login, CRUD)
+│   ├── authController.js
+│   └── taskController.js
+├── models/              # Estrutura dos dados (Schemas)
+│   ├── User.js
+│   └── Task.js
+├── routes/               # Endpoints e aplicação da segurança
+│   ├── authRoutes.js
+│   └── taskRoutes.js
+├── middleware/           # Funções de proteção (JWT)
+│   └── authMiddleware.js
+├── .env.example          # Modelo das variáveis de ambiente (copie para .env)
+└── server.js             # Arquivo principal (rotas, DB, middlewares)
+```
 
-yaml
-Copiar código
+O front-end (React) fica em outro repositório/pasta, consumindo essa API via REST.
 
 ---
 
 ## ⚙️ Instalação e Configuração (Back-End)
 
 ### Pré-requisitos
-- Node.js e npm instalados  
-- Conta no MongoDB Atlas com cluster configurado  
+- Node.js e npm instalados
+- Conta no MongoDB Atlas com cluster configurado
 
 ### Instalação
 ```bash
-cd backend
 npm install
-Configuração do .env
-env
-Copiar código
+```
+
+### Configuração do .env
+Copie `.env.example` para `.env` e preencha com seus valores:
+```env
 MONGO_URI="mongodb+srv://<USUARIO>:<SENHA>@cluster0.xxx.mongodb.net/todo-db?retryWrites=true&w=majority"
 PORT=5000
 JWT_SECRET="sua_chave_secreta_aleatoria_e_forte_aqui"
-Iniciar o Servidor
-bash
-Copiar código
+```
+
+### Iniciar o Servidor
+```bash
 npm run dev
+```
 🌐 O servidor estará rodando em: http://localhost:5000
 
 🔑 API Endpoints
